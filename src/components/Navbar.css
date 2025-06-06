@@ -11,8 +11,29 @@
 .logo a {
   font-size: 2rem;
   font-weight: bold;
-  color: red;
   text-decoration: none;
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+/* Colores separados por parte */
+.logo-white {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.logo-yellow {
+  color: #ffc107;
+  transition: color 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.logo a:hover .logo-white {
+  color: #bbb;
+}
+
+.logo a:hover .logo-yellow {
+  color: red;
 }
 
 .nav-links {
@@ -22,7 +43,7 @@
 }
 
 .nav-links li a {
-  color: white;
+  color: black;
   font-weight: bold;
   text-decoration: none;
 }

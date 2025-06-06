@@ -19,10 +19,10 @@ function Navbar() {
       <div className="navbar">
         <div className="logo">
           <Link to="/" onClick={cerrarMenu}>
-            MOVIEHACK
+            <span className="logo-white">MOVIE</span>
+            <span className="logo-yellow">HACK</span>
           </Link>
         </div>
-
         <button className="hamburger" onClick={toggleMenu}>
           ☰
         </button>
