@@ -8,13 +8,29 @@
   border-top: 1px solid #444;
 }
 
-.footer a {
+.footer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.linkedin-link {
   color: #ffc107;
   text-decoration: none;
   font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   transition: color 0.3s ease;
 }
 
-.footer a:hover {
-  color: red;
+.linkedin-link:hover {
+  color: #ffffff;
+}
+
+.linkedin-icon {
+  font-size: 1rem;
+  vertical-align: middle;
 }

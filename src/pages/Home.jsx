@@ -59,8 +59,8 @@ function Home() {
     <>
       <section className="imagSection">
         <div className="hero-text">
-          <h1>¡Tus películas favoritas!</h1>
-          <h2>Buscá entre miles de títulos...</h2>
+          {/* <h1>¡Tus películas favoritas!</h1>
+          <h2>Buscá entre miles de títulos...</h2>  */}
         </div>
       </section>
 

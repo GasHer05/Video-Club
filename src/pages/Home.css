@@ -22,14 +22,15 @@
 h1 {
   font-size: 2.5rem;
   text-align: center;
+  margin-top: 100px;
   margin-bottom: 10px;
-  color: #0f0f0f;
+  color: blue;
 }
 
 h2 {
   font-size: 1.2rem;
   text-align: center;
-  color: #0f0f0f;
+  color: blue;
 }
 
 .search-input {
