@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Movie from "../components/Movie";
 import "./Home.css";
-import "../App.css";
 
 function Home() {
   const [searchInputValue, setSearchInputValue] = useState("");

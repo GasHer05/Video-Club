@@ -1,8 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Loader from "../components/Loader"; // importo el componente loader
-import "../App.css";
+import Loader from "../components/Loader";
 import "./MovieDetail.css";
 
 function MovieDetail() {
