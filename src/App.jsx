@@ -5,6 +5,7 @@ import MovieDetail from "./pages/MovieDetail";
 import NotFound from "./pages/NotFound";
 import Contacto from "./pages/Contacto";
 import SobreEsteProyecto from "./pages/SobreEsteProyecto";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/sobre-este-proyecto" element={<SobreEsteProyecto />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 }
