@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: rgb(96, 94, 94);
+  color: white;
+}
+
+.loading,
+.error-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffc107;
+  padding: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  color: #ffc107;
+}
+
+main {
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
