@@ -1,7 +1,14 @@
+/* RESET Y CONFIGURACIÓN GLOBAL */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Sticky Footer Layout */
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -10,6 +17,23 @@ body {
   color: white;
 }
 
+/* App layout principal */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* El main toma el espacio restante */
+main {
+  flex: 1;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ESTILOS DE MENSAJES */
 .loading,
 .error-message {
   text-align: center;
@@ -23,11 +47,4 @@ body {
   margin: 2rem 0;
   font-size: 1.2rem;
   color: #ffc107;
-}
-
-main {
-  padding: 0.5rem;
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
 }

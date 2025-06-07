@@ -1,5 +1,5 @@
-import "./Footer.css";
 import { FaLinkedin } from "react-icons/fa";
+import "./Footer.css";
 
 function Footer() {
   return (
@@ -10,12 +10,10 @@ function Footer() {
           href="https://www.linkedin.com/in/aldo-hernandez-288134113/"
           target="_blank"
           rel="noopener noreferrer"
-          className="linkedin-link"
         >
-          <FaLinkedin className="linkedin-icon" />
+          <FaLinkedin style={{ marginLeft: "6px", verticalAlign: "middle" }} />{" "}
           Gastón Hernández
         </a>
-        © {new Date().getFullYear()}
       </p>
     </footer>
   );

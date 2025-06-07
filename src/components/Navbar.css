@@ -8,6 +8,16 @@
   position: relative;
 }
 
+.navbar{
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+
+}
+
 .logo a {
   font-size: 2rem;
   font-weight: bold;
@@ -40,6 +50,15 @@
   list-style: none;
   display: flex;
   gap: 2rem;
+  li{
+    display: flex;
+    align-items: center;
+
+  /* a{
+      margin-top: auto;
+      margin-bottom: auto;
+    }*/
+  }
 }
 
 .nav-links li a {
