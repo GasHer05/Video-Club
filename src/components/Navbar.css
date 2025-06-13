@@ -62,13 +62,13 @@
 }
 
 .nav-links li a {
-  color: black;
+  color: white;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 .nav-links li a:hover {
-  color: #535250; 
+  color: #ffc107; 
 }
 
 .hamburger {
@@ -112,4 +112,61 @@
   top: 0;
   z-index: 999;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-button {
+  border: 2px solid #ffc107;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  color: #ffc107;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #ffc107;
+  color: #1e1e1e !important;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.username {
+  font-weight: bold;
+  color: #ffc107;
+}
+
+.login-button {
+  border: 2px solid #ffc107;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  color: #ffc107;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #ffc107;
+  color: #1e1e1e !important;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 2px solid #ffc107;
+  color: #ffc107;
+  font-weight: bold;
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.logout-btn:hover {
+  background-color: #ffc107;
+  color: #1e1e1e;
+  transform: scale(1.05);
 }
