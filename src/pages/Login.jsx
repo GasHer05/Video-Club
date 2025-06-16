@@ -1,110 +1,75 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../redux/authSlice"; // Acción para guardar token en Redux
-import axios from "axios";
+import { login } from "../redux/authSlice"; // Usamos el nuevo thunk
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import "./Login.css";
 
 function Login() {
-  const navigate = useNavigate(); // Esto nos permite cambiar de página desde el código JS
-  const dispatch = useDispatch(); // Lo usamos para "despachar" el token al store global
+  // Estados locales del formulario
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Estado del formulario: guarda lo que el usuario escribe
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [error, setError] = useState(""); // Acá guardamos un mensaje si hay error (ej: usuario incorrecto)
-
-  // Nuevo estado para mostrar un mensaje de éxito visual
-  const [successMessage, setSuccessMessage] = useState("");
-  const [success, setSuccess] = useState(""); // Nuevo: mensaje de éxito
-
-  // Se ejecuta cada vez que el usuario escribe algo en el input
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value, // Acá usamos el name del input para actualizar el valor correcto
-    }));
-  };
-
-  // Esto se ejecuta cuando apretamos el botón "Ingresar"
+  // Manejador del submit del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
+    setLoading(true);
 
     try {
-      // 1️⃣ Obtenemos el token y userId
-      const res = await axios.post(
-        "https://ha-videoclub-api-g1.vercel.app/tokens",
-        formData
-      );
-      const { token, userId } = res.data;
+      const result = await dispatch(login({ email, password }));
 
-      // 2️⃣ Obtenemos los datos del usuario con ese userId
-      const userRes = await axios.get(
-        `https://ha-videoclub-api-g1.vercel.app/users/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // 3️⃣ Despachamos token + usuario al store global
-      dispatch(loginSuccess({ token, user: userRes.data }));
-
-      // 4️⃣ Redireccionamos
-      setSuccess("Inicio de sesión exitoso.");
-      navigate("/");
-    } catch (err) {
-      console.error("Error al iniciar sesión:", err);
-      setError("Correo o contraseña incorrectos.");
+      if (login.fulfilled.match(result)) {
+        const user = result.payload.user;
+        toast.success(`Bienvenido/a ${user.firstname || email}`);
+        navigate("/perfil");
+      } else {
+        toast.error("Email o contraseña incorrectos");
+      }
+    } catch (error) {
+      toast.error("Error al intentar ingresar");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <main className="login-container">
-      <h1>Iniciar Sesión</h1>
-
-      {/*  Formulario controlado */}
+      <h1>Iniciar sesión</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
+          autoFocus
+          id="email"
           type="email"
-          name="email"
-          placeholder="Ingresá tu email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <label>Contraseña</label>
+        <label htmlFor="password">Contraseña</label>
         <input
+          id="password"
           type="password"
-          name="password"
-          placeholder="••••••••"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <button type="submit" className="btn-login">
-          Ingresar
+        <button type="submit" disabled={loading} className="login-btn">
+          {loading ? <Loader size={20} /> : "Ingresar"}
         </button>
-
-        {/*  Mensaje de error si las credenciales son incorrectas */}
-        {error && <p className="login-error">{error}</p>}
-
-        {/*  Mensaje visual de éxito */}
-        {successMessage && <p className="login-success">{successMessage}</p>}
       </form>
 
-      {/*  Link a la página de registro si aún no tiene cuenta */}
-      <p className="login-register-link">
-        ¿Todavía no tenés una cuenta? <Link to="/register">Crear cuenta</Link>
+      <p>
+        ¿No tienes cuenta?{" "}
+        <a href="/register" className="register-link">
+          Registrate aquí
+        </a>
       </p>
     </main>
   );

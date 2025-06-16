@@ -1,16 +1,59 @@
 .movie-card {
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s;
-  cursor: pointer;
+  background: #232323;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px #0002;
+  padding: 1.2em 1em 1.7em 1em;
+  margin: 0.5em;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.18s;
 }
 
 .movie-card:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  box-shadow: 0 8px 36px #0003;
 }
 
-.movie-card img {
-  width: 100%;
-  display: block;
+.movie-poster {
+  width: 150px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 9px;
+  box-shadow: 0 2px 12px #0002;
+  margin-bottom: 0.7em;
+  background: #444;
+}
+
+.add-cart-btn {
+  margin-top: 0.5em;
+  background: #ffc107;
+  color: #232323;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1.08em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s, color 0.2s;
+}
+
+.add-cart-btn:hover {
+  background: #b71c1c;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .movie-card {
+    width: 96vw;
+    max-width: 330px;
+    margin: 0.5em auto;
+  }
+  .movie-poster {
+    width: 90vw;
+    max-width: 270px;
+    height: 350px;
+  }
 }

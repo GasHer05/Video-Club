@@ -1,135 +1,124 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { register } from "../redux/authSlice";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import "./Register.css";
 
+/**
+ * Componente de registro de nuevos usuarios.
+ */
 function Register() {
+  // Estados para cada campo del formulario
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    // en formData es un objeto que guarda lo que el usuario escribe en el formulario y setFormData es la función que se usa para actualizar eso.
-    firstname: "",
-    lastname: "",
-    email: "",
-    address: "",
-    phone: "",
-    password: "",
-  });
-
-  const [error, setError] = useState(null); // creamos un estado donde vamos a guardar un posible error que pase al tratar de registrarse.
-
-  // Nuevo estado para mostrar éxito visualmente
-  const [successMessage, setSuccessMessage] = useState(null);
-
-  const handleChange = (e) => {
-    //Esta función se activa cada vez que escribís algo en un campo del formulario
-    setFormData({
-      ...formData, //Copia todo lo que ya tenías antes.
-      [e.target.name]: e.target.value, //[e.target.name] → Actualiza solo ese campo específico.
-    });
-  };
-
-  //Esta función se activa cuando hacés clic en el botón “Registrarse”
+  // Handler del submit del formulario
   const handleSubmit = async (e) => {
-    e.preventDefault(); // evita que el formulario recargue la página
-    setError(""); // limpiamos errores anteriores
-    setSuccessMessage(null); // reseteamos mensaje anterior
+    e.preventDefault();
+    setLoading(true);
 
     try {
-      const response = await fetch(
-        "https://ha-videoclub-api-g1.vercel.app/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
+      const result = await dispatch(
+        register({ firstname, lastname, address, phone, email, password })
       );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        const message =
-          errorData?.message ||
-          "Hubo un error al registrar. Verificá los datos.";
-        throw new Error(message);
-      }
-
-      const data = await response.json(); // recibimos los datos del nuevo usuario creado
-      console.log("Usuario creado:", data);
-
-      // Mostrar mensaje de éxito
-      setSuccessMessage("🎉 Registro exitoso, redirigiendo...");
-
-      // Esperamos 2 segundos antes de redirigir
-      setTimeout(() => {
+      if (register.fulfilled.match(result)) {
+        toast.success(`¡Registro exitoso, ${firstname}!`);
         navigate("/login");
-      }, 2000);
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
+      } else {
+        const msg =
+          result.payload ||
+          result.error?.message ||
+          "No se pudo registrar. Intenta con otro email.";
+        toast.error(msg);
+      }
+    } catch (error) {
+      toast.error("Error inesperado al intentar registrarse.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <main className="register-page">
-      <h1>Registrarse</h1>
+    <main className="register-container">
+      <h1>Registro de usuario</h1>
       <form className="register-form" onSubmit={handleSubmit}>
+        <label htmlFor="firstname">Nombre</label>
         <input
+          autoFocus
+          id="firstname"
           type="text"
-          name="firstname"
-          placeholder="Nombre"
-          value={formData.firstname}
-          onChange={handleChange}
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
           required
         />
+
+        <label htmlFor="lastname">Apellido</label>
         <input
+          id="lastname"
           type="text"
-          name="lastname"
-          placeholder="Apellido"
-          value={formData.lastname}
-          onChange={handleChange}
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
           required
         />
+
+        <label htmlFor="address">Dirección</label>
         <input
+          id="address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+        />
+
+        <label htmlFor="phone">Teléfono</label>
+        <input
+          id="phone"
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
           type="email"
-          name="email"
-          placeholder="Correo electrónico"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
+
+        <label htmlFor="password">Contraseña</label>
         <input
-          type="text"
-          name="address"
-          placeholder="Dirección"
-          value={formData.address}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Teléfono"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
-        <input
+          id="password"
           type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Registrarse</button>
+
+        <button type="submit" disabled={loading} className="register-btn">
+          {loading ? <Loader size={20} /> : "Registrarme"}
+        </button>
       </form>
 
-      {/* Mensaje de error si hay problema */}
-      {error && <p className="register-error">{error}</p>}
-
-      {/* Mensaje de éxito si todo salió bien */}
-      {successMessage && <p className="register-success">{successMessage}</p>}
+      <p>
+        ¿Ya tienes cuenta?{" "}
+        <a href="/login" className="login-link">
+          Inicia sesión aquí
+        </a>
+      </p>
     </main>
   );
 }

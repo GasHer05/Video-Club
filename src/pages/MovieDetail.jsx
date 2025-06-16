@@ -1,14 +1,21 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+import { toast } from "react-toastify";
 import axios from "axios";
 import Loader from "../components/Loader";
 import "./MovieDetail.css";
 
+/**
+ * Muestra los detalles de una película.
+ */
 function MovieDetail() {
-  const { id } = useParams(); // obtengo el id desde la URL
-  const navigate = useNavigate(); // hook para redirigir al home
-  const [pelicula, setPelicula] = useState(null); // estado para la data de la película
-  const [error, setError] = useState(false); // estado para manejar errores
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [pelicula, setPelicula] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     axios
@@ -24,28 +31,32 @@ function MovieDetail() {
       });
   }, [id]);
 
-  // Paso 1: mostrar spinner mientras carga
   if (!pelicula && !error) {
     return <Loader />;
   }
 
-  // Paso 2: Si hubo error
   if (error) {
     return (
       <p className="error-message">No se encontró la película solicitada.</p>
     );
   }
 
-  // Paso 3: volver al home
   const volverHome = () => {
     navigate("/");
   };
 
+  // Imagen por defecto si no hay poster_path
+  const posterSrc = pelicula.poster_path
+    ? `https://image.tmdb.org/t/p/w500${pelicula.poster_path}`
+    : "/img/placeholder.png";
+
   return (
     <main className="movie-detail-container">
       <img
-        src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`}
-        alt={pelicula.title}
+        src={posterSrc}
+        alt={
+          pelicula.title ? `Poster de ${pelicula.title}` : "Poster de película"
+        }
         className="movie-detail-img"
       />
 
@@ -64,8 +75,17 @@ function MovieDetail() {
           <strong>Géneros:</strong>{" "}
           {pelicula.genres.map((g) => g.name).join(", ")}
         </p>
-
-        {/* Botón para regresar al inicio */}
+        <button
+          className="agregar-carrito-btn"
+          onClick={() => {
+            dispatch(
+              addToCart({ movie_id: pelicula.id, title: pelicula.title })
+            );
+            toast.success("¡Película agregada al carrito!");
+          }}
+        >
+          Agregar al carrito
+        </button>
         <button className="back-button" onClick={volverHome}>
           Volver al inicio
         </button>

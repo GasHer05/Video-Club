@@ -1,6 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute"; // Componente para proteger rutas privadas
 
+// Importa ToastContainer y CSS
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Componentes principales
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,6 +14,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MovieDetail from "./pages/MovieDetail";
+import Carrito from "./pages/Carrito";
+import Checkout from "./pages/Checkout";
 import SobreEsteProyecto from "./pages/SobreEsteProyecto";
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +37,8 @@ function App() {
         <Route path="/pelicula/:id" element={<MovieDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/sobre-este-proyecto" element={<SobreEsteProyecto />} />
 
         {/* Rutas protegidas - solo si hay sesión activa */}
@@ -48,6 +56,16 @@ function App() {
       </Routes>
 
       <Footer />
+      {/* ToastContainer SIEMPRE debe ir aquí, una sola vez en la app */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1800}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }
