@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import "./Navbar.css";
 
 function Navbar() {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const cart = useSelector(function (state) {
+    return state.cart;
+  });
 
   const toggleMenu = () => {
     setMenuAbierto(!menuAbierto);
@@ -37,11 +41,7 @@ function Navbar() {
               Sobre Este Proyecto
             </Link>
           </li>
-          <li>
-            <Link to="/contacto" onClick={cerrarMenu}>
-              Contacto
-            </Link>
-          </li>
+          <li>Carrito: {cart.length}</li>
         </ul>
       </div>
     </header>

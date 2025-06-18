@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Movie from "../components/Movie";
-import "./Home.css";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { reset } from '../store/cartSlice';
+import axios from 'axios';
+import Movie from '../components/Movie';
+import './Home.css';
 
 function Home() {
-  const [searchInputValue, setSearchInputValue] = useState("");
+  const [searchInputValue, setSearchInputValue] = useState('');
   const [peliculas, setPeliculas] = useState([]);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     setSearchInputValue(e.target.value);
@@ -16,7 +19,7 @@ function Home() {
 
   // Si input está vacío → cargar populares
   useEffect(() => {
-    if (searchInputValue.trim() === "") {
+    if (searchInputValue.trim() === '') {
       axios
         .get(
           `https://api.themoviedb.org/3/discover/movie?api_key=3ec9419c15f48f156f567f311613a140&language=es-ES`
@@ -26,7 +29,7 @@ function Home() {
           setError(false);
         })
         .catch((err) => {
-          console.error("Error al cargar películas populares:", err);
+          console.error('Error al cargar películas populares:', err);
           setError(true);
         });
     }
@@ -34,7 +37,7 @@ function Home() {
 
   //  Si el usuario escribe → hacer búsqueda
   useEffect(() => {
-    if (searchInputValue.trim() === "") return;
+    if (searchInputValue.trim() === '') return;
 
     axios
       .get(
@@ -50,47 +53,68 @@ function Home() {
         }
       })
       .catch((err) => {
-        console.error("Error al buscar películas:", err);
+        console.error('Error al buscar películas:', err);
         setError(true);
       });
   }, [searchInputValue]);
 
   return (
     <>
-      <section className="imagSection">
-        <div className="hero-text">
+      <section className='imagSection'>
+        <div className='hero-text'>
           {/* <h1>¡Tus películas favoritas!</h1>
           <h2>Buscá entre miles de títulos...</h2>  */}
+          <button
+            onClick={() => {
+              dispatch({ type: 'token/prueba' });
+            }}
+          >
+            Acción de Prueba para token
+          </button>
+          {/* <button
+            onClick={() => {
+              dispatch({ type: 'cart/prueba' });
+            }}
+          >
+            Acción de Prueba para cart
+          </button> */}
+          <button
+            onClick={() => {
+              dispatch(reset());
+            }}
+          >
+            Resetear carrito
+          </button>
         </div>
       </section>
 
       <main>
         <div
-          className="rating"
+          className='rating'
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <h3>Buscar por título:</h3>
           <input
-            type="text"
-            placeholder="Escribí el nombre de la película..."
+            type='text'
+            placeholder='Escribí el nombre de la película...'
             value={searchInputValue}
             onInput={handleInputChange}
-            className="search-input"
+            className='search-input'
           />
         </div>
 
         {error && (
-          <p className="error-message">
+          <p className='error-message'>
             Lo sentimos, no se encontraron películas con el título buscado.
           </p>
         )}
 
         {peliculas.length > 0 && (
-          <section className="movies-grid">
+          <section className='movies-grid'>
             {peliculas.map((pelicula) => (
               <Movie
                 key={pelicula.id}
