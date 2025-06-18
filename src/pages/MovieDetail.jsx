@@ -1,8 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
-import { toast } from "react-toastify";
+
 import axios from "axios";
 import Loader from "../components/Loader";
 import { RiShoppingCart2Line } from "react-icons/ri";

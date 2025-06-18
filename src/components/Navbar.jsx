@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../redux/authSlice";
-import { clearCart } from "../redux/cartSlice";
-import { FaShoppingCart, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+
 import { FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
 
@@ -21,16 +18,15 @@ function Navbar() {
   const dispatch = useDispatch();
 
   // Traemos token, user y carrito de Redux
-  const { token, user } = useSelector((state) => state.auth);
   const cartItems = useSelector((state) => state.cart.items);
 
   // Cantidad total de películas en carrito (sumando qty)
-  const totalQty = cartItems.reduce((acc, item) => acc + item.qty, 0);
+  // const totalQty = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   // Logout: borra token, usuario y carrito. Redirige a login.
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(clearCart());
+    // dispatch(clearCart());
     navigate("/login");
     setMenuOpen(false); // Cierra menú en mobile
   };
@@ -50,16 +46,16 @@ function Navbar() {
         </div>
 
         {/* Botón hamburger para mobile */}
-        <button
+        {/* <button
           className="hamburger"
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
         >
           {menuOpen ? <FiX /> : <FiMenu />}
-        </button>
+        </button> */}
 
         {/* Links del navbar, clase open para mobile */}
-        <ul className={`nav-links${menuOpen ? " open" : ""}`}>
+        <ul>
           <li>
             <Link to="/" onClick={handleLinkClick}>
               Home

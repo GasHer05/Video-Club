@@ -25,12 +25,4 @@ function Movie({ id, imagen, nombre, onClick }) {
   );
 }
 
-Movie.propTypes = {
-  id: PropTypes.number,
-  nombre: PropTypes.string,
-  imagen: PropTypes.string,
-  onClick: PropTypes.func,
-  onAddToCart: PropTypes.func,
-};
-
 export default Movie;
