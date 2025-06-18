@@ -39,13 +39,6 @@ function App() {
         {/* Rutas públicas (siempre accesibles) */}
         <Route path="/" element={<Home />} />
         <Route path="/pelicula/:id" element={<MovieDetail />} />
-<<<<<<< HEAD
-=======
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/carrito" element={<Carrito />} />
-        <Route path="/checkout" element={<Checkout />} />
->>>>>>> 65f26692715724117ae9425366085364e2d50ef6
         <Route path="/sobre-este-proyecto" element={<SobreEsteProyecto />} />
 
         {/* Rutas protegidas - solo si hay sesión activa */}
