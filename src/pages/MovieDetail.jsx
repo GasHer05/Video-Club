@@ -1,10 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+import { toast } from "react-toastify";
 import axios from "axios";
 import Loader from "../components/Loader";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import "./MovieDetail.css";
 
+/**
+ * Muestra los detalles de una película.
+ */
 function MovieDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -94,6 +100,11 @@ function MovieDetail() {
         transition: "background-image 0.5s",
       }
     : {};
+
+  // Imagen por defecto si no hay poster_path
+  const posterSrc = pelicula.poster_path
+    ? `https://image.tmdb.org/t/p/w500${pelicula.poster_path}`
+    : "/img/placeholder.png";
 
   return (
     <main className="movie-detail-container" style={backgroundStyle}>

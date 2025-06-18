@@ -1,0 +1,90 @@
+/* Contenedor principal del login */
+.login-container {
+  max-width: 400px;
+  margin: 2.7rem auto;
+  background: #232323;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2.3rem 2rem 2.1rem 2rem;
+  box-shadow: 0 0 18px #0004;
+}
+
+/* Título */
+.login-container h1 {
+  text-align: center;
+  color: #ffc107;
+  margin-bottom: 2rem;
+}
+
+/* Formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+  margin-bottom: 1.2em;
+}
+
+.login-form label {
+  color: #ffc107;
+  margin-bottom: 0.3em;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.login-form input {
+  background: #292929;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7em 1em;
+  margin-top: 0.1em;
+  font-size: 1em;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.login-form input:focus {
+  box-shadow: 0 0 6px #ffc107;
+}
+
+.login-btn {
+  padding: 0.7em 1.5em;
+  background: #ffc107;
+  color: #232323;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1.2em;
+}
+.login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.login-btn:hover:not(:disabled) {
+  background: #00796b;
+  color: #fff;
+}
+
+/* Link a registro */
+.register-link {
+  color: #ffc107;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.register-link:hover {
+  color: #ff5252;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-container {
+    padding: 1.3rem 0.6rem 1rem 0.6rem;
+  }
+  .login-form {
+    gap: 0.8em;
+  }
+}

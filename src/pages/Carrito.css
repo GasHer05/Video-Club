@@ -1,0 +1,178 @@
+/* Contenedor principal del carrito */
+.carrito-container {
+  max-width: 600px;
+  margin: 2.5rem auto;
+  background: #232323;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  box-shadow: 0 0 16px #0004;
+}
+
+/* Título */
+.carrito-container h1 {
+  text-align: center;
+  color: #ffc107;
+  margin-bottom: 2rem;
+}
+
+/* Mensaje si el carrito está vacío */
+.carrito-empty {
+  text-align: center;
+  color: #bbb;
+  font-size: 1.08em;
+  padding: 1.7em 0;
+}
+
+/* Lista de pelis en el carrito */
+.carrito-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.3em 0;
+}
+
+/* Cada item del carrito */
+.carrito-item {
+  display: flex;
+  align-items: center;
+  background: #333;
+  padding: 0.7em 1em;
+  border-radius: 6px;
+  margin-bottom: 0.7em;
+  font-size: 1.08rem;
+  gap: 1em;
+  position: relative;
+}
+
+/* Imagen pequeña del poster */
+.carrito-movie-img {
+  width: 50px;
+  height: 74px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 1em;
+  background: #222;
+  box-shadow: 0 2px 6px #0003;
+}
+
+/* Título y cantidad */
+.carrito-title {
+  font-weight: bold;
+  flex: 1;
+}
+.carrito-qty {
+  font-size: 1em;
+  background: #ffc107;
+  color: #222;
+  padding: 0.1em 0.8em;
+  border-radius: 16px;
+  font-weight: bold;
+  margin-left: 1em;
+}
+
+/* Botón eliminar */
+.carrito-remove-btn {
+  background: #b71c1c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4em 1em;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: background 0.2s;
+}
+.carrito-remove-btn:hover {
+  background: #ff5252;
+  color: #fff;
+}
+
+/* Acciones debajo de la lista */
+.carrito-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5em;
+  flex-wrap: wrap;
+}
+
+.carrito-total {
+  color: #ffc107;
+  font-weight: bold;
+  margin-right: auto;
+  font-size: 1.07em;
+}
+
+.carrito-clear-btn {
+  padding: 0.6em 1.2em;
+  background: none;
+  color: #ffc107;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 0.7em;
+}
+.carrito-clear-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.carrito-clear-btn:hover:not(:disabled) {
+  background: #ffc107;
+  color: #232323;
+}
+
+.carrito-checkout-btn {
+  padding: 0.7em 1.6em;
+  background: #ffc107;
+  color: #232323;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.carrito-checkout-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.carrito-checkout-btn:hover:not(:disabled) {
+  background: #00796b;
+  color: #fff;
+}
+
+/* Responsive: apila items en mobile */
+@media (max-width: 600px) {
+  .carrito-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .carrito-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2em;
+    font-size: 0.98rem;
+  }
+  .carrito-movie-img {
+    margin-bottom: 0.6em;
+    margin-right: 0;
+    width: 100%;
+    height: auto;
+    max-width: 80px;
+    max-height: 120px;
+  }
+  .carrito-actions {
+    flex-direction: column;
+    gap: 0.6em;
+    align-items: stretch;
+  }
+  .carrito-total {
+    margin-right: 0;
+    margin-bottom: 0.3em;
+    text-align: left;
+  }
+}
+
