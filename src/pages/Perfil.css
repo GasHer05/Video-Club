@@ -1,0 +1,97 @@
+/* .perfil-container {
+  background: rgba(34, 34, 34, 0.93);
+  color: #fff;
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin: 2rem auto 3rem auto;
+  border-radius: 18px;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.23);
+  font-family: inherit;
+  min-height: 390px;
+}
+
+.perfil-container h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #ffc107;
+  letter-spacing: 0.5px;
+}
+
+.perfil-container p {
+  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+  word-break: break-word;
+}
+
+.perfil-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.perfil-container input {
+  background: #232323;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 0.6rem 0.9rem;
+  border-radius: 7px;
+  margin-bottom: 0.1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.perfil-container input:focus {
+  border: 1.5px solid #ffc107;
+}
+
+.perfil-container button {
+  background: #ffc107;
+  color: #232323;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.perfil-container button:hover {
+  background: #e1b006;
+}
+
+.perfil-container .alert {
+  background: #222831;
+  color: #ffc107;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.perfil-container button[type="button"] {
+  background: #232323;
+  color: #ffc107;
+  border: 1px solid #ffc107;
+  margin-left: 8px;
+  margin-top: 0.5rem;
+}
+
+.perfil-container button[type="button"]:hover {
+  background: #444;
+}
+
+.perfil-container button[style*="color: red"] {
+  background: #222;
+  color: #ff5a36 !important;
+  border: 1px solid #ff5a36;
+  margin-left: 8px;
+}
+
+.perfil-container button[style*="color: red"]:hover {
+  background: #290d0d;
+} */

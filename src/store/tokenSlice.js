@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
+// Slice para manejar el token de autenticación
 const tokenSlice = createSlice({
-  name: 'token',
-  initialState: '',
+  name: "token",
+  initialState: "",
   reducers: {
+    // Almacena el token recibido
     setToken(state, action) {
-      // action.payload
-      const elTokenQueVamosAGuardar = action.payload;
-      return elTokenQueVamosAGuardar;
+      return action.payload;
     },
-    prueba(state, action) {
-      return 'prueba';
+    // Si necesitas un "logout", puedes agregarlo así:
+    clearToken() {
+      return "";
     },
   },
 });
 
-console.log(tokenSlice);
+// Exporta solo las acciones necesarias
+export const { setToken, clearToken } = tokenSlice.actions;
 
-const { setToken, prueba } = tokenSlice.actions;
+// Exporta el reducer como default
 export default tokenSlice.reducer;

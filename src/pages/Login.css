@@ -1,0 +1,117 @@
+#loginContainer {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.form-section {
+  background: rgba(30, 30, 30, 0.97);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.28);
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  width: 100%;
+  max-width: 370px;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.form-title {
+  font-size: 2rem;
+  color: #ffc107;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.form-group {
+  margin-bottom: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  margin-bottom: 0.45rem;
+  font-size: 1.07rem;
+  color: #ffc107;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: #222;
+  color: #fafafa;
+  outline: none;
+  margin-bottom: 0;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.09);
+}
+
+.form-group input:focus {
+  box-shadow: 0 0 0 2px #ffc10799;
+}
+
+.btn#loginBtn {
+  width: 100%;
+  background-color: #ffc107;
+  color: #1e1e1e;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.15rem;
+  padding: 0.85rem 0;
+  margin-top: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.btn#loginBtn:hover,
+.btn#loginBtn:focus {
+  background-color: #ffd700;
+  color: #b71c1c;
+}
+
+.switch-form {
+  text-align: center;
+  margin-top: 1.7rem;
+  font-size: 1rem;
+}
+
+.switch-form a {
+  color: #ffc107;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.switch-form a:hover {
+  color: #ffd700;
+}
+
+.alert.alert-error {
+  background: #b71c1c;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+@media (max-width: 500px) {
+  .form-section {
+    padding: 1.2rem 0.5rem;
+    max-width: 97vw;
+  }
+  .form-title {
+    font-size: 1.4rem;
+  }
+}

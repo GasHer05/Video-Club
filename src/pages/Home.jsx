@@ -9,17 +9,15 @@ import "./Home.css";
 function Home() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [peliculas, setPeliculas] = useState([]);
-  // Estado para mostrar si hubo error en la búsqueda o carga
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Maneja el cambio en el input de búsqueda
   const handleInputChange = (e) => {
     setSearchInputValue(e.target.value);
   };
 
-  // Si el input está vacío, carga películas populares de TMDb
+  // Si input está vacío → cargar populares
   useEffect(() => {
     if (searchInputValue.trim() === "") {
       axios
@@ -27,8 +25,8 @@ function Home() {
           `https://api.themoviedb.org/3/discover/movie?api_key=3ec9419c15f48f156f567f311613a140&language=es-ES`
         )
         .then((res) => {
-          setPeliculas(res.data.results); // Setea la lista de pelis populares
-          setError(false); // Limpia error si todo ok
+          setPeliculas(res.data.results);
+          setError(false);
         })
         .catch((err) => {
           console.error("Error al cargar películas populares:", err);
@@ -37,7 +35,7 @@ function Home() {
     }
   }, [searchInputValue]);
 
-  // Si el usuario escribe algo, busca por título usando TMDb
+  // Si el usuario escribe → hacer búsqueda
   useEffect(() => {
     if (searchInputValue.trim() === "") return;
 
@@ -47,11 +45,11 @@ function Home() {
       )
       .then((res) => {
         if (res.data.results.length === 0) {
-          setError(true); // Muestra error si no hay resultados
+          setError(true);
           setPeliculas([]);
         } else {
-          setPeliculas(res.data.results); // Setea pelis encontradas
-          setError(false); // Limpia error si todo ok
+          setPeliculas(res.data.results);
+          setError(false);
         }
       })
       .catch((err) => {
@@ -64,21 +62,13 @@ function Home() {
     <>
       <section className="imagSection">
         <div className="hero-text">
-          {/* <h1>¡Tus películas favoritas!</h1>
-          <h2>Buscá entre miles de títulos...</h2>  */}
+          {/* Botón de ejemplo para disparar acción de prueba
           <button
             onClick={() => {
               dispatch({ type: "token/prueba" });
             }}
           >
             Acción de Prueba para token
-          </button>
-          {/* <button
-            onClick={() => {
-              dispatch({ type: 'cart/prueba' });
-            }}
-          >
-            Acción de Prueba para cart
           </button> */}
           <button
             onClick={() => {
@@ -100,7 +90,6 @@ function Home() {
           }}
         >
           <h3>Buscar por título:</h3>
-          {/* Input controlado para buscar película */}
           <input
             type="text"
             placeholder="Escribí el nombre de la película..."
@@ -110,14 +99,12 @@ function Home() {
           />
         </div>
 
-        {/* Muestra mensaje si no hay resultados */}
         {error && (
           <p className="error-message">
             Lo sentimos, no se encontraron películas con el título buscado.
           </p>
         )}
 
-        {/* Grid de películas, muestra cada Movie con botón para agregar al carrito */}
         {peliculas.length > 0 && (
           <section className="movies-grid">
             {peliculas.map((pelicula) => (
@@ -126,19 +113,7 @@ function Home() {
                 id={pelicula.id}
                 nombre={pelicula.title}
                 imagen={pelicula.poster_path}
-                // Click en la tarjeta → ir al detalle
                 onClick={() => navigate(`/pelicula/${pelicula.id}`)}
-                // Click en "Agregar al carrito"
-                onAddToCart={() => {
-                  dispatch(
-                    addToCart({
-                      movie_id: pelicula.id,
-                      title: pelicula.title,
-                    })
-                  );
-                  // Notificación visual personalizada con nombre de la peli
-                  toast.success(`¡Agregaste ‘${pelicula.title}’ al carrito!`);
-                }}
               />
             ))}
           </section>

@@ -1,38 +1,38 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { addMovie } from "../store/cartSlice";
 import axios from "axios";
 import Loader from "../components/Loader";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import "./MovieDetail.css";
 
-/**
- * Muestra los detalles de una película.
- */
 function MovieDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pelicula, setPelicula] = useState(null);
-  const [error, setError] = useState(false);
   const [trailerKey, setTrailerKey] = useState(null);
+  const [error, setError] = useState(false);
+  const dispatch = useDispatch();
 
+  // Carga datos de película y trailer de YouTube
   useEffect(() => {
     setError(false);
     setPelicula(null);
     setTrailerKey(null);
+
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=3ec9419c15f48f156f567f311613a140&language=es-ES`
       )
       .then((res) => {
         setPelicula(res.data);
-        // Obtiene el trailer después de obtener la película
+        // Luego busca el trailer
         axios
           .get(
             `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3ec9419c15f48f156f567f311613a140&language=es-ES`
           )
           .then((videoRes) => {
-            // Busca un video tipo Trailer en YouTube
             const trailer = videoRes.data.results.find(
               (vid) =>
                 vid.site === "YouTube" &&
@@ -78,16 +78,16 @@ function MovieDetail() {
   } = pelicula;
 
   const genreList = genres?.map((g) => g.name).join(", ") || "N/A";
-  const duracion = runtime ? `${runtime} min` : "N/A";
+  const duracion = runtime ? `${runtime} minutos` : "N/A";
   const year = release_date ? release_date.slice(0, 4) : "N/A";
   const idioma =
     original_language === "es"
-      ? "Español"
+      ? "español"
       : original_language === "en"
-      ? "Inglés"
+      ? "inglés"
       : original_language?.toUpperCase();
 
-  // Estilos dinámicos para el fondo
+  // Fondo dinámico con backdrop de la película
   const backgroundStyle = backdrop_path
     ? {
         backgroundImage: `linear-gradient(rgba(30,30,30,0.90), rgba(30,30,30,0.98)), url(https://image.tmdb.org/t/p/original${backdrop_path})`,
@@ -99,95 +99,99 @@ function MovieDetail() {
       }
     : {};
 
-  // Imagen por defecto si no hay poster_path
-  const posterSrc = pelicula.poster_path
-    ? `https://image.tmdb.org/t/p/w500${pelicula.poster_path}`
-    : "/img/placeholder.png";
-
   return (
-    <main className="movie-detail-container" style={backgroundStyle}>
-      <button className="back-button" onClick={() => navigate("/")}>
-        ← Volver al inicio
-      </button>
-      <div className="movie-detail-main">
-        <div className="movie-detail-img-wrapper">
-          {trailerKey ? (
-            <div className="movie-detail-video-wrapper">
-              <iframe
-                title="Trailer"
-                width="340"
-                height="200"
-                src={`https://www.youtube.com/embed/${trailerKey}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="movie-detail-video"
-                style={{ borderRadius: "12px", background: "#222" }}
-              ></iframe>
+    <>
+      <section className="imagSection"></section>
+      <main className="movie-detail-container" style={backgroundStyle}>
+        <button className="back-button" onClick={() => navigate("/")}>
+          ← Volver al inicio
+        </button>
+        <div className="movie-detail-main">
+          <div className="movie-detail-img-wrapper">
+            {trailerKey ? (
+              <div className="movie-detail-video-wrapper">
+                <iframe
+                  title="Trailer"
+                  width="340"
+                  height="200"
+                  src={`https://www.youtube.com/embed/${trailerKey}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="movie-detail-video"
+                  style={{ borderRadius: "12px", background: "#222" }}
+                ></iframe>
+              </div>
+            ) : (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                alt={title}
+                className="movie-detail-img"
+              />
+            )}
+          </div>
+          <section className="movie-detail-info">
+            <h1 className="movie-title">{title}</h1>
+            <div className="movie-meta">
+              <span>{year}</span>
+              <span>·</span>
+              <span>{duracion}</span>
+              <span>·</span>
+              <span>
+                ⭐ {vote_average} ({vote_count} votos)
+              </span>
             </div>
-          ) : (
-            // Si no hay trailer, muestra el poster como backup
-            <img
-              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-              alt={title}
-              className="movie-detail-img"
-            />
-          )}
-        </div>
-        <section className="movie-detail-info">
-          <h1 className="movie-title">{title}</h1>
-          <div className="movie-meta">
-            <span>{year}</span>
-            <span>·</span>
-            <span>{duracion}</span>
-            <span>·</span>
-            <span>
-              ⭐ {vote_average} ({vote_count} votos)
-            </span>
-          </div>
-          <div className="movie-genres">
-            <strong>Géneros:</strong> {genreList}
-          </div>
-          <div className="movie-overview">
-            <p>{overview || "Sin descripción."}</p>
-          </div>
-          <div className="movie-ficha">
-            <ul>
-              <li>
-                <strong>Título original:</strong> {original_title}
-              </li>
-              <li>
-                <strong>Estreno:</strong> {release_date || "N/A"}
-              </li>
-              <li>
-                <strong>Idioma original:</strong> {idioma}
-              </li>
-              <li>
-                <strong>Promedio votos:</strong> {vote_average}
-              </li>
-              <li>
-                <strong>Votos totales:</strong> {vote_count}
-              </li>
-              <li
-                style={{ display: "flex", alignItems: "center", gap: "0.7rem" }}
-              >
-                <span>
-                  <strong>$ </strong>
-                  {(vote_average * 3).toFixed(2)}
-                </span>
-                <button
-                  className="cart-icon-btn"
-                  title="Agregar al carrito"
-                  disabled
+            <div className="movie-genres">
+              <strong>Géneros:</strong> {genreList}
+            </div>
+            <div className="movie-overview">
+              <p>{overview || "Sin descripción."}</p>
+            </div>
+            <div className="movie-ficha">
+              <ul>
+                <li>
+                  <strong>Título original:</strong> {original_title}
+                </li>
+                <li>
+                  <strong>Estreno:</strong> {release_date || "N/A"}
+                </li>
+                <li>
+                  <strong>Idioma original:</strong> {idioma}
+                </li>
+                <li>
+                  <strong>Promedio votos:</strong> {vote_average}
+                </li>
+                <li>
+                  <strong>Votos totales:</strong> {vote_count}
+                </li>
+                <li
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.7rem",
+                  }}
                 >
-                  <RiShoppingCart2Line size={22} color="#ffc107" />
-                </button>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </div>
-    </main>
+                  <span>
+                    <strong>$ </strong>
+                    {(vote_average * 3).toFixed(2)}
+                  </span>
+                  <button
+                    className="cart-icon-btn"
+                    title="Agregar al carrito"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      dispatch(addMovie({ id: id, name: title }));
+                    }}
+                  >
+                    <RiShoppingCart2Line size={22} color="#ffc107" />
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
 
