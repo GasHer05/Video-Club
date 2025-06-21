@@ -7,7 +7,11 @@ import MovieDetail from "./pages/MovieDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-// import Perfil from "./pages/Perfil";
+import Checkout from "./pages/Checkout";
+
+import Perfil from "./pages/Perfil";
+
+import Cart from "./pages/Cart";
 
 import NotFound from "./pages/NotFound";
 import SobreEsteProyecto from "./pages/SobreEsteProyecto";
@@ -34,10 +38,12 @@ function App() {
         <Route path="/sobre-este-proyecto" element={<SobreEsteProyecto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
-        {/* <Route path="/perfil" element={<Perfil />} /> */}
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/checkout" element={<Checkout />} />
         {/* Página para rutas no encontradas */}
         <Route path="*" element={<NotFound />} />
+
+        <Route path="/carrito" element={<Cart />} />
       </Routes>
 
       <Footer />

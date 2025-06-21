@@ -5,6 +5,7 @@ import { addMovie } from "../store/cartSlice";
 import axios from "axios";
 import Loader from "../components/Loader";
 import { RiShoppingCart2Line } from "react-icons/ri";
+import { toast } from "react-toastify";
 import "./MovieDetail.css";
 
 function MovieDetail() {
@@ -180,7 +181,13 @@ function MovieDetail() {
                     title="Agregar al carrito"
                     onClick={(event) => {
                       event.stopPropagation();
-                      dispatch(addMovie({ id: id, name: title }));
+                      const precio = Number((vote_average * 3).toFixed(2));
+                      dispatch(
+                        addMovie({ id: id, name: title, price: precio })
+                      );
+                      toast.success(
+                        `Se agregó "${title}" al carrito correctamente`
+                      );
                     }}
                   >
                     <RiShoppingCart2Line size={22} color="#ffc107" />

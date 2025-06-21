@@ -61,23 +61,7 @@ function Home() {
   return (
     <>
       <section className="imagSection">
-        <div className="hero-text">
-          {/* Botón de ejemplo para disparar acción de prueba
-          <button
-            onClick={() => {
-              dispatch({ type: "token/prueba" });
-            }}
-          >
-            Acción de Prueba para token
-          </button> */}
-          <button
-            onClick={() => {
-              dispatch(reset());
-            }}
-          >
-            Resetear carrito
-          </button>
-        </div>
+        <div className="hero-text"></div>
       </section>
 
       <main>
@@ -113,6 +97,7 @@ function Home() {
                 id={pelicula.id}
                 nombre={pelicula.title}
                 imagen={pelicula.poster_path}
+                precio={Number((pelicula.vote_average * 3).toFixed(2))}
                 onClick={() => navigate(`/pelicula/${pelicula.id}`)}
               />
             ))}

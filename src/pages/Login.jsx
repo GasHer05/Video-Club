@@ -2,7 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../store/tokenSlice";
+import { setUserAuth } from "../store/authSlice";
+import { toast } from "react-toastify";
 import "./Login.css";
 
 export default function Login() {
@@ -33,7 +34,17 @@ export default function Login() {
         }
       );
 
-      dispatch(setToken(response.data.token));
+      console.log(response.data);
+      console.log("-------------------------");
+
+      dispatch(
+        setUserAuth({
+          token: response.data.token,
+          userId: response.data.userId,
+        })
+      );
+      toast.success("Bienvenido, has iniciado sesión");
+
       navigate("/");
     } catch (error) {
       setError("Usuario o contraseña incorrectos");

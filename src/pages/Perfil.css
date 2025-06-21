@@ -1,97 +1,442 @@
-/* .perfil-container {
-  background: rgba(34, 34, 34, 0.93);
-  color: #fff;
-  padding: 2.5rem 2rem 2rem 2rem;
-  margin: 2rem auto 3rem auto;
+/* #perfilContainer {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  margin-bottom: 2.5rem;
+}
+
+.perfil-section {
+  background: rgba(30, 30, 30, 0.97);
   border-radius: 18px;
-  max-width: 400px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.23);
-  font-family: inherit;
-  min-height: 390px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.28);
+  padding: 3.2rem 2.2rem 2.7rem 2.2rem;
+  width: 100%;
+  max-width: 370px;
+  color: #fff;
+  margin: 0 auto;
 }
 
-.perfil-container h2 {
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  font-size: 1.6rem;
+.perfil-section h2 {
+  font-size: 2rem;
   color: #ffc107;
-  letter-spacing: 0.5px;
+  text-align: center;
+  margin-bottom: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.perfil-container p {
-  margin-bottom: 0.5rem;
+.perfil-info-block {
+  margin-bottom: 2.2rem;
+}
+
+.datoPerfil{
+  padding: 10px !important;
+}
+.btnPerfil{
+  padding-top: 15px;
+}
+
+.perfil-info-block p {
+  margin-bottom: 1.1rem;
   font-size: 1.08rem;
   word-break: break-word;
 }
+.perfil-info-block .label {
+  color: #ffc107;
+  font-weight: 600;
+}
 
-.perfil-container form {
+.perfil-section form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.perfil-container input {
-  background: #232323;
-  color: #fff;
-  border: 1px solid #444;
-  padding: 0.6rem 0.9rem;
-  border-radius: 7px;
-  margin-bottom: 0.1rem;
+.perfil-section input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
   font-size: 1rem;
+  background: #222;
+  color: #fafafa;
   outline: none;
-  transition: border 0.2s;
+  margin-bottom: 0;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.09);
+}
+.perfil-section input:focus {
+  box-shadow: 0 0 0 2px #ffc10799;
 }
 
-.perfil-container input:focus {
-  border: 1.5px solid #ffc107;
+.perfil-btns {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
 }
 
-.perfil-container button {
+.perfil-section button,
+.perfil-section .perfil-btn {
   background: #ffc107;
   color: #232323;
   border: none;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.05rem;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 1rem;
-  margin-top: 0.5rem;
+  font-size: 1.04rem;
   cursor: pointer;
   transition: background 0.18s;
 }
-
-.perfil-container button:hover {
+.perfil-section button:hover,
+.perfil-section .perfil-btn:hover {
   background: #e1b006;
 }
 
-.perfil-container .alert {
+.eliminar-btn {
+  background: #222 !important;
+  color: #ff5a36 !important;
+  border: 1px solid #ff5a36 !important;
+}
+.eliminar-btn:hover {
+  background: #330f0f !important;
+}
+
+.perfil-section .alert {
   background: #222831;
   color: #ffc107;
   padding: 0.6rem 1rem;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
   font-size: 1rem;
   font-weight: bold;
+  text-align: center;
 }
 
-.perfil-container button[type="button"] {
-  background: #232323;
+.perfil-loading {
   color: #ffc107;
-  border: 1px solid #ffc107;
-  margin-left: 8px;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 1.7rem 0;
+}
+
+@media (max-width: 500px) {
+  .perfil-section {
+    padding: 1.2rem 0.5rem;
+    max-width: 97vw;
+  }
+  .perfil-section h2 {
+    font-size: 1.4rem;
+  }
+}
+
+
+.orders-title {
+  margin: 3.2rem auto 1.2rem auto;
+  color: #ffc107;
+  font-size: 1.45rem;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.orders-list {
+  max-width: 570px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.order-card {
+  background: rgba(22,22,22,0.96);
+  border-radius: 15px;
+  box-shadow: 0 3px 16px rgba(0,0,0,0.19);
+  color: #fafafa;
+  margin-bottom: 2rem;
+  padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+  font-size: 1.06rem;
+  transition: box-shadow 0.17s;
+}
+
+.order-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.24);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #ffc107;
+  font-size: 1.12rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid #343434;
+  padding-bottom: 0.2rem;
+}
+
+.order-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin-bottom: 1.3rem;
+  flex-wrap: wrap;
+}
+.order-details {
+  flex: 1;
+  min-width: 150px;
+}
+.order-items {
+  flex: 1.2;
+  min-width: 140px;
+  color: #fff;
+}
+.order-items > div {
+  margin-bottom: 0.35rem;
+}
+
+.order-total {
+  text-align: right;
+  color: #ffc107;
+  font-size: 1.14rem;
+  font-weight: bold;
+  border-top: 1px solid #343434;
+  padding-top: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.perfil-container button[type="button"]:hover {
-  background: #444;
-}
-
-.perfil-container button[style*="color: red"] {
-  background: #222;
-  color: #ff5a36 !important;
-  border: 1px solid #ff5a36;
-  margin-left: 8px;
-}
-
-.perfil-container button[style*="color: red"]:hover {
-  background: #290d0d;
+@media (max-width: 600px) {
+  .orders-list {
+    max-width: 98vw;
+    padding: 0 0.2rem;
+  }
+  .order-card {
+    padding: 1.1rem 0.5rem;
+    font-size: 0.96rem;
+  }
+  .order-content {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
 } */
+
+
+#perfilContainer {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  padding-bottom: 2.5rem;
+}
+
+/* Card de perfil de usuario */
+.perfil-section {
+  background: rgba(30, 30, 30, 0.98);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.23);
+  padding: 2.5rem 2rem 2.2rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  color: #fff;
+  margin: 2rem auto 1.5rem auto;
+  transition: box-shadow 0.22s;
+}
+
+/* Título perfil */
+.perfil-section h2 {
+  font-size: 2.2rem;
+  color: #ffc107;
+  text-align: center;
+  margin-bottom: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Datos del perfil */
+.datoPerfil {
+  font-size: 1.08rem;
+  margin-bottom: 0.7rem;
+  padding: 0.48rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(48, 48, 48, 0.68);
+  font-family: inherit;
+}
+
+/* Botones perfil */
+.btnPerfil {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+.perfil-section button {
+  background: #ffc107;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  transition: background 0.18s, color 0.18s;
+}
+.perfil-section button:hover {
+  background: #e1b006;
+  color: #fff;
+}
+.eliminar-btn {
+  background: #222 !important;
+  color: #ff5a36 !important;
+  border: 1px solid #ff5a36 !important;
+}
+.eliminar-btn:hover {
+  background: #330f0f !important;
+}
+
+/* Formulario de edición */
+.perfil-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1rem;
+}
+.perfil-section input {
+  background: #222;
+  color: #fafafa;
+  border: 1.2px solid #444;
+  padding: 0.72rem 1.1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.perfil-section input:focus {
+  border: 1.7px solid #ffc107;
+}
+
+/* Mensajes */
+.perfil-section .alert, .perfil-loading {
+  background: #222831;
+  color: #ffc107;
+  padding: 0.65rem 1.1rem;
+  border-radius: 8px;
+  margin-bottom: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* --------- ÓRDENES --------- */
+.orders-section {
+  /* background-color: rgb(96, 94, 94); */
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.orders-title {
+  color: #ffc107;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 2.3rem 0 2rem 0;
+  letter-spacing: 1px;
+}
+
+/* Card orden */
+.order-card {
+  background: rgba(30,30,30,0.96);
+  border-radius: 17px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  margin-bottom: 2rem;
+  padding: 2.1rem 1.7rem 1.1rem 1.7rem;
+  color: #fff;
+  border: 1.2px solid #444;
+  transition: box-shadow 0.2s;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.18rem;
+  font-weight: bold;
+  color: #ffc107;
+  margin-bottom: 1.3rem;
+}
+.order-header span:last-child {
+  font-size: 1.07rem;
+  font-weight: 600;
+  color: #ffc107;
+  opacity: 0.88;
+}
+
+/* Info orden */
+.order-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.3rem;
+}
+.order-details {
+  flex: 1.1;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  font-family: inherit;
+  color: #fff;
+}
+.order-details b {
+  color: #ffc107;
+  font-weight: 700;
+}
+.order-items {
+  flex: 1.2;
+  font-size: 1.02rem;
+}
+.order-items ul {
+  padding-left: 1.2rem;
+  margin: 0.3rem 0 0 0;
+}
+.order-items li {
+  margin-bottom: 0.33rem;
+  color: #fafafa;
+}
+
+.order-total {
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffc107;
+  margin-top: 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .orders-section {
+    max-width: 97vw;
+    padding: 0 0.5rem;
+  }
+  .order-content {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .perfil-section,
+  .order-card {
+    padding: 1.2rem 0.5rem;
+    max-width: 97vw;
+  }
+  .orders-title {
+    font-size: 1.2rem;
+  }
+  .order-header {
+    font-size: 1.02rem;
+  }
+  .order-total {
+    font-size: 1.02rem;
+  }
+}

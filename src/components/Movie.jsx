@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addMovie } from "../store/cartSlice";
+import { toast } from "react-toastify";
 import "./Movie.css";
 
 /**
@@ -10,7 +11,7 @@ import "./Movie.css";
  * - nombre: título.
  * - onClick: función para navegar o manejar click.
  */
-function Movie({ id, imagen, nombre, onClick }) {
+function Movie({ id, imagen, nombre, precio, onClick }) {
   const dispatch = useDispatch();
 
   return (
@@ -25,7 +26,8 @@ function Movie({ id, imagen, nombre, onClick }) {
         className="add-cart-btn"
         onClick={(event) => {
           event.stopPropagation();
-          dispatch(addMovie({ id: id, name: nombre }));
+          dispatch(addMovie({ id: id, name: nombre, price: precio }));
+          toast.success(`Se agregó "${nombre}" al carrito correctamente`);
         }}
       >
         Add to cart
