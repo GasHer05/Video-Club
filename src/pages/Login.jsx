@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserAuth } from "../store/authSlice";
+import { setUserAuth, setUserData } from "../store/authSlice";
 import { toast } from "react-toastify";
 import "./Login.css";
 
@@ -43,6 +43,16 @@ export default function Login() {
           userId: response.data.userId,
         })
       );
+
+      // --- Trae los datos completos del usuario y guardalos en Redux ---
+      const userRes = await axios.get(
+        `https://ha-videoclub-api-g1.vercel.app/users/${response.data.userId}`,
+        {
+          headers: { Authorization: `Bearer ${response.data.token}` },
+        }
+      );
+      dispatch(setUserData(userRes.data));
+
       toast.success("Bienvenido, has iniciado sesión");
 
       navigate("/");

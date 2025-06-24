@@ -29,6 +29,16 @@
   margin-bottom: 1.3rem;
 }
 
+.cart-img {
+  width: 48px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 12px;
+  background: #232323;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+}
+
 .cart-title {
   flex: 1;
   font-weight: 600;

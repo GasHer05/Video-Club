@@ -26,7 +26,9 @@ function Movie({ id, imagen, nombre, precio, onClick }) {
         className="add-cart-btn"
         onClick={(event) => {
           event.stopPropagation();
-          dispatch(addMovie({ id: id, name: nombre, price: precio }));
+          dispatch(
+            addMovie({ id: id, name: nombre, price: precio, imagen: imagen })
+          );
           toast.success(`Se agregó "${nombre}" al carrito correctamente`);
         }}
       >

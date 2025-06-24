@@ -46,6 +46,20 @@ export default function Cart() {
         <ul className="cart-list">
           {cart.map((movie) => (
             <li key={movie.id} className="cart-item">
+              {/* Imagen alineada a la izquierda */}
+              <img
+                className="cart-img"
+                src={`https://image.tmdb.org/t/p/w92${movie.imagen}`}
+                alt={movie.name}
+                style={{
+                  width: 48,
+                  height: 72,
+                  objectFit: "cover",
+                  borderRadius: 8,
+                  marginRight: 12,
+                  background: "#232323",
+                }}
+              />
               <span className="cart-title">{movie.name}</span>
               <span className="cart-price">
                 $ {(movie.price || 0).toFixed(2)}
