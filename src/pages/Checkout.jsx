@@ -201,11 +201,12 @@ export default function Checkout() {
         "https://ha-videoclub-api-g1.vercel.app/orders",
         {
           type: "movie",
-          data: cart.map((item) => ({
+          items: cart.map((item) => ({
             movie_id: item.id,
             title: item.name,
             qty: item.qty || 1,
             price: item.price || 0,
+            imagen: item.imagen || "",
           })),
         },
         {

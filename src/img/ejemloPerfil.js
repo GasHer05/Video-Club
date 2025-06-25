@@ -10,12 +10,13 @@ import { useNavigate } from "react-router-dom";
  * Permite ver, editar y eliminar datos del usuario,
  * y además muestra las órdenes realizadas (solo del usuario logueado).
  */
+
 export default function Perfil() {
   // Trae token y userId de Redux (authSlice)
   const { token, userId } = useSelector((state) => state.auth);
 
-  // Estados locales
-  const [user, setUser] = useState(null); // datos usuario + órdenes
+  // Estados locales para datos de usuario, modo edición, formulario, mensajes
+  const [user, setUser] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [form, setForm] = useState({});
   const [mensaje, setMensaje] = useState("");
@@ -23,7 +24,7 @@ export default function Perfil() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Al cargar/cambiar usuario o salir de edición, pide datos al backend
+  // Cuando cambia userId/token/editMode, pide datos del usuario
   useEffect(() => {
     if (!userId || !token || editMode) return;
     axios
@@ -31,7 +32,7 @@ export default function Perfil() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setUser(res.data); // res.data: info del user y orders
+        setUser(res.data); // res.data debe traer user + sus órdenes
         setForm(res.data);
       })
       .catch(() => setMensaje("No se pudo obtener los datos del usuario."));
@@ -59,7 +60,8 @@ export default function Perfil() {
         }
       );
       setMensaje("Perfil actualizado exitosamente.");
-      setEditMode(false); // Al salir de edición, refresca datos
+      setEditMode(false);
+      // Se dispara el useEffect arriba, refresca el perfil
     } catch {
       setMensaje("Error al actualizar el perfil.");
     }
@@ -81,6 +83,7 @@ export default function Perfil() {
         }
       );
       setMensaje("Usuario eliminado correctamente.");
+      // Logout automático y redirección
       dispatch(clearUserAuth());
       navigate("/");
     } catch {
@@ -197,13 +200,14 @@ export default function Perfil() {
         </h3>
         {Array.isArray(user.orders) && user.orders.length > 0 ? (
           user.orders.map((order) => {
-            // Usar items (no data)
-            const peliculas = Array.isArray(order.items) ? order.items : [];
-            // Calcular total
-            const orderTotal = peliculas.reduce(
-              (acc, item) => acc + (item.price || 0) * (item.qty || 1),
-              0
-            );
+            // Calcula el total de la orden sumando precio * cantidad
+            const orderTotal = Array.isArray(order.data)
+              ? order.data.reduce(
+                  (acc, item) => acc + (item.price || 0) * (item.qty || 1),
+                  0
+                )
+              : 0;
+
             return (
               <div className="order-card" key={order.id || order.order_id}>
                 <div className="order-header">
@@ -233,38 +237,15 @@ export default function Perfil() {
                   <div className="order-items">
                     <b>Películas alquiladas:</b>
                     <ul>
-                      {peliculas.length > 0 ? (
-                        peliculas.map((item, idx) => (
-                          <li
-                            key={item.id || item.movie_id || idx}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 12,
-                            }}
-                          >
-                            {/* Imagen pequeña de la película */}
-                            {item.poster_path && (
-                              <img
-                                src={item.poster_path}
-                                alt={item.title}
-                                style={{
-                                  width: 38,
-                                  height: 54,
-                                  objectFit: "cover",
-                                  borderRadius: 8,
-                                  marginRight: 10,
-                                }}
-                              />
-                            )}
-                            <span>
-                              <b>{item.title}</b> x{item.qty || 1}
-                              {item.price
-                                ? ` - $${(item.price * (item.qty || 1)).toFixed(
-                                    2
-                                  )}`
-                                : ""}
-                            </span>
+                      {Array.isArray(order.data) && order.data.length > 0 ? (
+                        order.data.map((item, idx) => (
+                          <li key={item.movie_id || idx}>
+                            {item.title} x{item.qty || 1}
+                            {item.price
+                              ? ` - $${(item.price * (item.qty || 1)).toFixed(
+                                  2
+                                )}`
+                              : ""}
                           </li>
                         ))
                       ) : (
