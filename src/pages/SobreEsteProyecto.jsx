@@ -18,7 +18,7 @@ function SobreEsteProyecto() {
       <p>
         El proyecto fue realizado en el marco del curso, como parte de un
         desafío integral para poner en práctica conocimientos avanzados de
-        desarrollo web utilizando herramientas modernas y siguiendo buenas
+        desarrollo web utilizando herramientas actuales y siguiendo buenas
         prácticas profesionales.
       </p>
 
@@ -29,7 +29,7 @@ function SobreEsteProyecto() {
           <span>
             React (componentes funcionales y hooks), Redux Toolkit para gestión
             del estado global, Redux-Persist para mantener el estado incluso
-            tras recargar la página, Axios para las peticiones HTTP, y CSS puro
+            tras recargar la página, Axios para las peticiones HTTP y CSS puro
             para los estilos.
           </span>
         </li>
@@ -46,8 +46,8 @@ function SobreEsteProyecto() {
           <b>API/backend:</b>{" "}
           <span>
             Las operaciones de login, registro de usuario, obtención de
-            películas y órdenes de compra se realizan contra una API externa
-            provista por Hack Academy para uso de los estudiantes.
+            películas y órdenes de compra se realizan contra una API externa que
+            fue provista por Hack Academy para uso de los estudiantes.
           </span>
         </li>
         <li>
@@ -91,7 +91,8 @@ function SobreEsteProyecto() {
           <b>Práctica profesional:</b>{" "}
           <span>
             El desarrollo permitió profundizar conocimientos de buenas
-            prácticas, modularización, y el flujo completo de una SPA moderna.
+            prácticas, modularización asi como el flujo completo de una SPA
+            moderna.
           </span>
         </li>
       </ul>
