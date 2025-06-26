@@ -183,7 +183,12 @@ function MovieDetail() {
                       event.stopPropagation();
                       const precio = Number((vote_average * 3).toFixed(2));
                       dispatch(
-                        addMovie({ id: id, name: title, price: precio })
+                        addMovie({
+                          id: id,
+                          name: title,
+                          price: precio,
+                          imagen: poster_path,
+                        })
                       );
                       toast.success(
                         `Se agregó "${title}" al carrito correctamente`

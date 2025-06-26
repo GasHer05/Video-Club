@@ -231,7 +231,7 @@ export default function Perfil() {
                     <b>Email:</b> {user.email}
                   </div>
                   <div className="order-items">
-                    <b>Películas alquiladas:</b>
+                    <b>Items:</b>
                     <ul>
                       {peliculas.length > 0 ? (
                         peliculas.map((item, idx) => (

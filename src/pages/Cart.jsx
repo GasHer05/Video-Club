@@ -1,20 +1,3 @@
-// import { useSelector } from 'react-redux';
-
-// export default function Cart() {
-//   const cart = useSelector((state) => state.cart);
-
-//   return (
-//     <>
-//       <h2>Carrito</h2>
-//       <ul>
-//         {cart.map((movie) => {
-//           return <li>{movie.name}</li>;
-//         })}
-//       </ul>
-//     </>
-//   );
-// }
-
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeMovie,
@@ -44,45 +27,49 @@ export default function Cart() {
         <p>Tu carrito está vacío.</p>
       ) : (
         <ul className="cart-list">
-          {cart.map((movie) => (
-            <li key={movie.id} className="cart-item">
-              {/* Imagen alineada a la izquierda */}
-              <img
-                className="cart-img"
-                src={`https://image.tmdb.org/t/p/w92${movie.imagen}`}
-                alt={movie.name}
-                style={{
-                  width: 48,
-                  height: 72,
-                  objectFit: "cover",
-                  borderRadius: 8,
-                  marginRight: 12,
-                  background: "#232323",
-                }}
-              />
-              <span className="cart-title">{movie.name}</span>
-              <span className="cart-price">
-                $ {(movie.price || 0).toFixed(2)}
-              </span>
-              <span>x{movie.qty || 1}</span>
-              <div className="qty-controls">
-                <button onClick={() => dispatch(decreaseQty(movie.id))}>
-                  -
+          {cart.map((item) => {
+            console.log("item:", item);
+
+            return (
+              <li key={item.id} className="cart-item">
+                {/* Imagen alineada a la izquierda */}
+                <img
+                  className="cart-img"
+                  src={`https://image.tmdb.org/t/p/w92${item.imagen}`}
+                  alt={item.name}
+                  style={{
+                    width: 48,
+                    height: 72,
+                    objectFit: "cover",
+                    borderRadius: 8,
+                    marginRight: 12,
+                    background: "#232323",
+                  }}
+                />
+                <span className="cart-title">{item.name}</span>
+                <span className="cart-price">
+                  $ {(item.price || 0).toFixed(2)}
+                </span>
+                <span>x{item.qty || 1}</span>
+                <div className="qty-controls">
+                  <button onClick={() => dispatch(decreaseQty(item.id))}>
+                    -
+                  </button>
+                  <span className="cart-qty">{item.qty || 1}</span>
+                  <button onClick={() => dispatch(increaseQty(item.id))}>
+                    +
+                  </button>
+                </div>
+                <button
+                  className="remove-btn"
+                  onClick={() => dispatch(removeMovie(item.id))}
+                  title="Eliminar del carrito"
+                >
+                  ❌
                 </button>
-                <span className="cart-qty">{movie.qty || 1}</span>
-                <button onClick={() => dispatch(increaseQty(movie.id))}>
-                  +
-                </button>
-              </div>
-              <button
-                className="remove-btn"
-                onClick={() => dispatch(removeMovie(movie.id))}
-                title="Eliminar del carrito"
-              >
-                ❌
-              </button>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       )}
 

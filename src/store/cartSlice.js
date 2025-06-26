@@ -1,27 +1,3 @@
-// import { createSlice } from '@reduxjs/toolkit';
-
-// const cartSlice = createSlice({
-//   name: 'cart',
-//   initialState: [],
-//   reducers: {
-//     prueba(state, action) {
-//       state.push({ name: 'prueba' });
-//     },
-//     addMovie(state, action) {
-//       // action.payload
-//       state.push({ id: action.payload.id, name: action.payload.name });
-//     },
-//     reset(state, action) {
-//       return [];
-//     },
-//   },
-// });
-
-// console.log(cartSlice);
-
-// export const { prueba, addMovie, reset } = cartSlice.actions;
-// export default cartSlice.reducer;
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
@@ -30,7 +6,7 @@ const cartSlice = createSlice({
   reducers: {
     // Agrega una película al carrito (suma cantidad si ya existe)
     addMovie(state, action) {
-      const { id, name, price } = action.payload;
+      const { id, name, price, imagen } = action.payload;
       const existing = state.find((item) => item.id === id);
       if (existing) {
         existing.qty = (existing.qty || 1) + 1;
@@ -40,6 +16,7 @@ const cartSlice = createSlice({
           name,
           qty: 1,
           price: price !== undefined ? price : 0,
+          imagen: imagen || "",
         });
       }
     },
