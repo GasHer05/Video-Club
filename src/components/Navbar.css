@@ -92,10 +92,27 @@
 
   .nav-links.open {
     display: flex;
+    background: rgba(30, 30, 30, 0.96);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 6px 24px #0003;
+  }
+
+  .nav-links.open li a {
+    color: #fff !important;
+    font-weight: bold;
+  }
+
+  .nav-links.open li a:hover {
+    color: #ffc107 !important;
   }
 
   .nav-links li {
     margin: 0.5rem 0;
+  }
+
+    .nav-links.open .cart-icon svg {
+    color: #fff !important;
+    transition: color 0.2s;
   }
 }
 
